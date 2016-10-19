@@ -5,6 +5,7 @@ var cors = require('cors');
 var authorize = require('./middleware/auth.js');
 
 var forecastRouter = require ('./routers/forecast.router.js');
+var indexRouter = require ('./routers/index.router.js');
 
 var port = process.env.PORT || 8080;
 
@@ -12,14 +13,17 @@ server.use(express.static(__dirname + '/public'));
 //the order we set these up is the order it will show
 server.use(logger);
 server.use(cors());
-server.use(authorize);
 
+server.use(indexRouter);
+// server.use(authorize); //comment this part out while practicing
 
-server.get('/', function(request, response){
-  response.sendFile('public/html/index.html', {root:__dirname});
-});
+//create a router using the following:
+// server.get('/', function(request, response){
+//   response.sendFile('public/html/index.html', {root:__dirname});
+// });
 
 server.use(forecastRouter);
+
 
 server.listen(port, function(){
   console.log('Now listenting on port...', port);
