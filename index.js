@@ -3,7 +3,6 @@ var server = express();
 var logger = require('./middleware/logger.js');
 var cors = require('cors');
 var authorize = require('./middleware/auth.js');
-
 var forecastRouter = require ('./routers/forecast.router.js');
 var indexRouter = require ('./routers/index.router.js');
 
@@ -13,14 +12,8 @@ server.use(express.static(__dirname + '/public'));
 //the order we set these up is the order it will show
 server.use(logger);
 server.use(cors());
-
 server.use(indexRouter);
-server.use(authorize); //comment this part out while practicing
-
-//create a router using the following:
-// server.get('/', function(request, response){
-//   response.sendFile('public/html/index.html', {root:__dirname});
-// });
+// server.use(authorize); //comment this part out while practicing
 
 server.use(forecastRouter);
 
