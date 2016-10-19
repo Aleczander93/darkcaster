@@ -3,9 +3,12 @@ var express = require('express');
 var router = express.Router();
 var apiKey =process.env.APIKEY || require ('../config.js').apiKey;
 var axios = require('axios');
+var authorize = require('../middleware/auth.js');
 var timeoutConfig = {
   timeout: 2000
 };
+
+router.use(authorize); //comment this part out while practicing
 
 router.get('/forecast/:latitude,:longitude', function(request, response){
   var url = buildForecastURL(request.params.latitude, request.params.longitude);

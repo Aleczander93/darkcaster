@@ -13,8 +13,6 @@ server.use(express.static(__dirname + '/public'));
 server.use(logger);
 server.use(cors());
 server.use(indexRouter);
-// server.use(authorize); //comment this part out while practicing
-
 server.use(forecastRouter);
 
 
