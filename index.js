@@ -7,7 +7,6 @@ var forecastRouter = require ('./routers/forecast.router.js');
 var indexRouter = require ('./routers/index.router.js');
 
 var port = process.env.PORT || 8080;
-
 server.use(express.static(__dirname + '/public'));
 //the order we set these up is the order it will show
 server.use(logger);
