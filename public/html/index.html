@@ -1,11 +1,28 @@
+
+
 <!DOCTYPE html>
-<html>
+<html ng-app='weatherApp'>
   <head>
     <title>Darkcaster</title>
     <link rel='stylesheet' href='css/main.css'>
   </head>
   <body>
-    I like Bugles Big Bag!
-    <script src='js/app.js'></script>
+    <div ng-controller='LocationController'>
+      <span>Latitude:</span>
+      <input type="text" ng-model='newLocationLat'>
+      <span>longitude:</span>
+      <input type="text" ng-model='newLocationLon'>
+      <button ng-click='createLocation($index, newLocationLat)'>Get Weather</button>
+      <ul>
+        <li ng-repeat='location in locations track by $index'>
+            <span>{{LocationLat.desc}}</span>
+        </li>
+      </ul>
+    </div>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js'></script>
+<script src='js/app.js'></script>
+<script src='js/controllers/main.controller.js'></script>
+<script src='js/services/location.service.js'></script>
   </body>
 </html>
