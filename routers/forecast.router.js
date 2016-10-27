@@ -21,9 +21,23 @@ router.get('/forecast/:latitude,:longitude', function(request, response){
     });
 });
 
+router.get('/coordinates/:latlng', function(request, response){
+  var url = 'https://maps.googleapis.com/maps/api/geocode/json?&latlng=' + request.params.latlng;
+  axios.get(url, timeoutConfig)
+  .then(function(latlng){
+    response.json(geocode.data.results[0].formatted_address);
+})
+.catch(function(error){ //when not successful
+  response.send(error);
+});
+
+});
+
 module.exports = router;
 
 function buildForecastURL (latitude, longitude){
     var url = 'https://api.darksky.net/forecast/'+ apiKey +'/'+ latitude +','+ longitude;
     return url;
 }
+
+//if i type an address inside the input it should responde with the weather information.

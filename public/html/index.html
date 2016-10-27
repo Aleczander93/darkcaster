@@ -12,12 +12,8 @@
       <input type="text" ng-model='newLocationLat'>
       <span>longitude:</span>
       <input type="text" ng-model='newLocationLon'>
-      <button ng-click='createLocation($index, newLocationLat)'>Get Weather</button>
-      <ul>
-        <li ng-repeat='location in locations track by $index'>
-            <span>{{LocationLat.desc}}</span>
-        </li>
-      </ul>
+      <button ng-click='createLocation(newLocationLat, newLocationLon)'>Get Weather</button>
+      <span>{{LocationLat.desc}}</span>
     </div>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js'></script>
