@@ -21,10 +21,10 @@ router.get('/forecast/:latitude,:longitude', function(request, response){
     });
 });
 
-router.get('/coordinates/:latlng', function(request, response){
-  var url = 'https://maps.googleapis.com/maps/api/geocode/json?&latlng=' + request.params.latlng;
+router.get('/createLocation/:latlng', function(request, response){
+  var url = 'https://maps.googleapis.com/maps/api/geocode/json?&latlng=' + request.params.createLocation;
   axios.get(url, timeoutConfig)
-  .then(function(latlng){
+  .then(function(createLocation){
     response.json(geocode.data.results[0].formatted_address);
 })
 .catch(function(error){ //when not successful

@@ -1,19 +1,19 @@
 
 
 (function(){
-  angular.module('weatherApp')
+  angular.module('weatherApp', [])
   .controller('LocationController', LocationController);
 
-    LocationController.$inject = ['$scope'];
+    LocationController.$inject = ['$scope', '$http'];
 
-    function LocationController($scope){
+    function LocationController($scope, $http){
       // $scope.locations = LocationService.get();
       $scope.createLocation = createLocation;
       // $scope.editLocation = editLocation;
 
-    function createLocation (newLocationLat, newLocationLon) {
+    function createLocation (newLocationLat, newLocationLng) {
       // LocationService.delete(newLocationLat, newLocationLon);
-      console.log(newLocationLat, newLocationLon);
+      console.log(newLocationLat, newLocationLng);
       // LocationService.create(newLocationLat);
       // $scope.newLocationLat='';
       // $scope.newlocationLon='';
@@ -21,11 +21,10 @@
 
     $http({
       method: 'GET',
-      url: 'https://maps.googleapis.com/maps/api/geocode/json?&latlng='
+      url: '/createLocation/:latlng'
     }).then(function successCallback(response){
-
+      $scope.createLocation = response.data;
     }, function errorCallback(response) {
-
     });
 
     // function editLocation(location){
