@@ -1,34 +1,31 @@
 
 
 (function(){
-  angular.module('weatherApp', [])
+  angular.module('weatherApp')
   .controller('LocationController', LocationController);
 
-    LocationController.$inject = ['$scope', '$http'];
+    LocationController.$inject = ['$scope', 'weatherService'];
 
-    function LocationController($scope, $http){
+    function LocationController($scope, weatherService){
       // $scope.locations = LocationService.get();
       $scope.createLocation = createLocation;
       // $scope.editLocation = editLocation;
 
-    function createLocation (newLocationLat, newLocationLng) {
-      // LocationService.delete(newLocationLat, newLocationLon);
-      console.log(newLocationLat, newLocationLng);
-      // LocationService.create(newLocationLat);
-      // $scope.newLocationLat='';
-      // $scope.newlocationLon='';
+    function createLocation (latitude, longitude) {
+      weatherService.createLocation(latitude, longitude)
+      .then(function(response){
+        $scope.weather = response.data;
+        // debugger;
+      });
     }
 
-    $http({
-      method: 'GET',
-      url: '/createLocation/:latlng'
-    }).then(function successCallback(response){
-      $scope.createLocation = response.data;
-    }, function errorCallback(response) {
-    });
+    }
+    }());
 
-    // function editLocation(location){
-    //   location.isBeingEdited = true;
-    // }
-}
-}());
+    // $http({
+    //   method: 'GET',
+    //   url: '/createLocation/:latlng'
+    // }).then(function successCallback(response){
+    //   $scope.createLocation = response.data;
+    // }, function errorCallback(response) {
+    // });
