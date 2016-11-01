@@ -10,17 +10,23 @@
       // $scope.locations = LocationService.get();
       $scope.createLocation = createLocation;
       // $scope.editLocation = editLocation;
+      $scope.weather = weatherService.weatherData;
+    
+
+    $scope.$watch(function(){
+      return weatherService.weatherData;
+    }, function(newVal, oldVal){
+      $scope.weather = weatherService.weatherData;
+    });
 
     function createLocation (latitude, longitude) {
-      weatherService.createLocation(latitude, longitude)
-      .then(function(response){
-        $scope.weather = response.data;
-        // debugger;
-      });
+        weatherService.createLocation(latitude, longitude);
     }
-
-    }
-    }());
+    // function log(){
+    //   console.log(weatherService.weatherData);
+    // }
+  }
+}());
 
     // $http({
     //   method: 'GET',

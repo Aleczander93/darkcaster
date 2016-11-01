@@ -12,6 +12,11 @@
     <h1>Darkcaster</h1>
 
     <div id="controller" ng-controller='LocationController'>
+      <!-- the above is for current weather only -->
+      <!-- <div ng-controller="minutelyController"></div>
+      <div ng-controller="hourlyController"></div>
+      <div ng-controller="dailyController"></div> -->
+
       <div class="inputbtn">
         <input type="text" ng-model='latitude' placeholder="Latitude">
         <input type="text" ng-model='longitude' placeholder="longitude">
@@ -31,15 +36,16 @@
             <h3>{{weather.currently.summary}}</h3>
           </div>
           <div class="col-md-2">
+            <!-- the following uses a angular filter to format the date -->
             <strong>{{weather.currently.time * 1000 | date:"short"}}</strong>
           </div>
         </div>
         <div class="row">
           <div class="col-md-3"> Tempature: {{weather.currently.temperature | number:0 }} &deg;F</div>
-          <div class="col-md-3 col-md-offset-6"> Precipitation Probablity: {{weather.currently.precipProbability * 100 | number:0 }}  </div>
+          <div class="col-md-3 col-md-offset-6"> Precipitation Probablity: {{weather.currently.precipProbability * 100 | number:0 }}%  </div>
         </div>
       </div>
-
+<button ng-click="log()">Log</button>
       <span>{{createLocation.desc}}</span>
     </div>
 
