@@ -62,16 +62,11 @@
             <img ng-src="images/{{weather.minutely.icon}}.png" alt="{{weather.minutely.icon}}" class='img-responsive'>
           </div>
           <div class="col-md-6">
-            <h3>{{weather.minutely.summary}}</h3>
-          </div>
-          <div class="col-md-2">
-            <!-- the following uses a angular filter to format the date -->
-            <strong>{{weather.minutely.time * 1000 | date:"short"}}</strong>
+            <h3>{{weather.flags.summary}}</h3>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3"> Temperature: {{weather.minutely.temperature | number:0 }} &deg;F</div>
-          <div class="col-md-3 col-md-offset-6"> Precipitation Probablity: {{weather.minutely.precipProbability * 100 | number:0 }}%  </div>
+          <div class="col-md-3"> Temperature: {{weather.flags.sources }}</div>
         </div>
       </div>
     </div>
@@ -85,24 +80,23 @@
         <input type="text" ng-model='longitude' placeholder="longitude">
       </div>
       <div class="button">
-        <button ng-click='gethourly(latitude, longitude)'>Get hourly update</button>
+        <button ng-click='getHourly(latitude, longitude)'>Get hourly update</button>
       </div>
       <div ng-show='weather.hourly'>
         <div class="row">
           <div class="col-md-1">
-            <img ng-src="images/{{weather.minutely.icon}}.png" alt="{{weather.minutely.icon}}" class='img-responsive'>
+            <img ng-src="images/{{weather.hourly.icon}}.png" alt="{{weather.hourly.icon}}" class='img-responsive'>
           </div>
           <div class="col-md-6">
             <h3>{{weather.hourly.summary}}</h3>
           </div>
-          <div class="col-md-2">
-            <!-- the following uses a angular filter to format the date -->
-            <strong>{{weather.minutely.time * 1000 | date:"short"}}</strong>
-          </div>
+          <!-- <div class="col-md-2">
+            the following uses a angular filter to format the date
+             <strong>{{weather.minutely.time * 1000 | date:"short"}}</strong>
+          </div> -->
         </div>
         <div class="row">
-          <div class="col-md-3"> Temperature: {{weather.minutely.temperature | number:0 }} &deg;F</div>
-          <div class="col-md-3 col-md-offset-6"> Precipitation Probablity: {{weather.minutely.precipProbability * 100 | number:0 }}%  </div>
+          <div class="col-md-3"> Hourly: {{weather.hourly.data}}</div>
         </div>
       </div>
     </div>
@@ -113,6 +107,7 @@
 <script src='js/app.js'></script>
 <script src='js/controllers/main.controller.js'></script>
 <script src='js/controllers/minutely.controller.js'></script>
+<script src='js/controllers/hourly.controller.js'></script>
 <script src='js/services/weather.service.js'></script>
   </body>
 </html>

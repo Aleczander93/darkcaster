@@ -15,6 +15,7 @@
       service.weatherData = [];
       service.getWeather = getWeather;
       service.getMinutely = getMinutely;
+      service.getHourly = getHourly;
       return service;
 
       function getWeather(latitude, longitude){
@@ -27,12 +28,25 @@
         var url = '/forecast/'+ latitude + ',' + longitude;
         return $http.get(url, config)
             .then(function(response){
-              
               service.weatherData = response.data;
             });
       }
 
       function getMinutely(latitude, longitude){
+        lat = latitude;
+        lon = longitude;
+        var config = {
+          headers: secretToken
+        };
+
+        var url = '/forecast/'+ latitude + ',' + longitude;
+        return $http.get(url, config)
+            .then(function(response){
+              service.weatherData = response.data;
+            });
+      }
+
+      function getHourly(latitude, longitude){
         lat = latitude;
         lon = longitude;
         var config = {
