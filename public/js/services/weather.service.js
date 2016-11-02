@@ -8,19 +8,31 @@
       var secretToken = {
         secret: 'its a secret'
       };
+
       var lat;
       var lon;
       var service = {};
       service.weatherData = [];
-      service.createLocation = createLocation;
+      service.getWeather = getWeather;
+      service.getMinutely = getMinutely;
       return service;
 
-      // return {
-      //   weatherData: weatherData,
-      //   createLocation: createLocation
-      // };
+      function getWeather(latitude, longitude){
+        lat = latitude;
+        lon = longitude;
+        var config = {
+          headers: secretToken
+        };
 
-      function createLocation(latitude, longitude){
+        var url = '/forecast/'+ latitude + ',' + longitude;
+        return $http.get(url, config)
+            .then(function(response){
+              
+              service.weatherData = response.data;
+            });
+      }
+
+      function getMinutely(latitude, longitude){
         lat = latitude;
         lon = longitude;
         var config = {
