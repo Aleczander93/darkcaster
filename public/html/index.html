@@ -8,17 +8,10 @@
     <link rel='stylesheet' href='css/main.css'>
   </head>
   <body>
-
-    <h1>Darkcaster</h1>
-
-
-    <!--
-
-    <div ng-controller="dailyController"></div> -->
-
-<!-- the below is for current weather only -->
-
-    <div id="controller" ng-controller='LocationController'>
+    <h1>It's the weather bruh.</h1>
+  <div class="container">
+    <!-- the below is for current weather only -->
+    <div ng-controller='LocationController'>
       <div class="inputbtn">
         <input type="text" ng-model='latitude' placeholder="Latitude">
         <input type="text" ng-model='longitude' placeholder="longitude">
@@ -28,45 +21,51 @@
       </div>
       <div ng-show='weather.currently'>
         <div class="row">
-          <div class="col-md-1">
-            <img ng-src="images/{{weather.currently.icon}}.png" alt="{{weather.currently.icon}}"
-            class = 'img-responsive'>
-          </div>
-          <div class="col-md-6">
+          <div class="col-md-3 col-md-offset-2">
+            <p>{{weather.currently.time * 1000 | date:"EEEE h:mm a"}}</p>
             <h3>{{weather.currently.summary}}</h3>
-          </div>
-          <div class="col-md-2">
-            <!-- the following uses a angular filter to format the date -->
-            <strong>{{weather.currently.time * 1000 | date:"short"}}</strong>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-3"> Temperature: {{weather.currently.temperature | number:0 }} &deg;F</div>
-          <div class="col-md-3 col-md-offset-6"> Precipitation Probablity: {{weather.currently.precipProbability * 100 | number:0 }}% </div>
+          <div class="col-md-1 col-md-offset-2">
+            <img ng-src="images/{{weather.currently.icon}}.png" alt="{{weather.currently.icon}}"
+            class = 'img-responsive'>
+          </div>
+          <div class="col-md-2">
+            <strong class="temp">{{weather.currently.temperature | number:0 }} &deg;F</strong>
+          </div>
+          <div class="col-md-2 col-md-offset-2">
+            Precipitation: {{weather.currently.precipProbability * 100 | number:0 }}%
+          </div>
+          <div class="col-md-2 col-md-offset-2">
+            Humidity: {{weather.currently.humidity * 100 | number:0 }}%
+          </div>
+          <div class="col-md-2 col-md-offset-2">
+            Wind: {{weather.currently.windSpeed | number:0 }}mph
+          </div>
         </div>
+
       </div>
     </div>
 
 <!-- Beginning of Minutely controller -->
-    <div id="controller" ng-controller="minutelyController">
-      <div class="inputbtn">
-        <input type="text" ng-model='latitude' placeholder="Latitude">
-        <input type="text" ng-model='longitude' placeholder="longitude">
-      </div>
-      <div class="button">
-        <button ng-click='getMinutely(latitude, longitude)'>Get minutely update</button>
-      </div>
-      <div ng-show='weather.minutely'>
+
+    <div ng-controller="minutelyController">
+      <div ng-show ="weather.minutely">
+        <h2>It's the weather in minutes bruh.</h2>
+        <!-- {{minuteLat}}, {{minuteLon}} -->
         <div class="row">
-          <div class="col-md-1">
-            <img ng-src="images/{{weather.minutely.icon}}.png" alt="{{weather.minutely.icon}}" class='img-responsive'>
+          <div class="col-md-2" ng-repeat='minute in weather.minutely.data'>
+            <div class="well">
+              Time: {{minute.time * 1000 | date:"h:mm a"}}
+              <div>
+              Prob: {{minute.precipProbability * 100 | number:0}}
+              </div>
+              <div>
+              Intensity: {{ minute.precipIntensity * 100 | number:0}}
+              </div>
+            </div>
           </div>
-          <div class="col-md-6">
-            <h3>{{weather.flags.summary}}</h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-3"> Temperature: {{weather.flags.sources }}</div>
         </div>
       </div>
     </div>
@@ -74,15 +73,9 @@
 
   <!-- Beginning of hourly controller-->
 
-    <div id="controller" ng-controller="hourlyController">
-      <div class="inputbtn">
-        <input type="text" ng-model='latitude' placeholder="Latitude">
-        <input type="text" ng-model='longitude' placeholder="longitude">
-      </div>
-      <div class="button">
-        <button ng-click='getHourly(latitude, longitude)'>Get hourly update</button>
-      </div>
+    <!-- <div ng-controller="hourlyController">
       <div ng-show='weather.hourly'>
+        <h2>It's the hourly weather bruh.</h2>
         <div class="row">
           <div class="col-md-1">
             <img ng-src="images/{{weather.hourly.icon}}.png" alt="{{weather.hourly.icon}}" class='img-responsive'>
@@ -90,24 +83,22 @@
           <div class="col-md-6">
             <h3>{{weather.hourly.summary}}</h3>
           </div>
-          <!-- <div class="col-md-2">
-            the following uses a angular filter to format the date
+          <div class="col-md-2">
              <strong>{{weather.minutely.time * 1000 | date:"short"}}</strong>
-          </div> -->
+          </div>
         </div>
         <div class="row">
           <div class="col-md-3"> Hourly: {{weather.hourly.data}}</div>
         </div>
       </div>
-    </div>
+    </div> -->
 
-
-
-<script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js'></script>
-<script src='js/app.js'></script>
-<script src='js/controllers/main.controller.js'></script>
-<script src='js/controllers/minutely.controller.js'></script>
-<script src='js/controllers/hourly.controller.js'></script>
-<script src='js/services/weather.service.js'></script>
-  </body>
+  </div>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js'></script>
+  <script src='js/app.js'></script>
+  <script src='js/controllers/main.controller.js'></script>
+  <script src='js/controllers/minutely.controller.js'></script>
+  <script src='js/controllers/hourly.controller.js'></script>
+  <script src='js/services/weather.service.js'></script>
+</body>
 </html>

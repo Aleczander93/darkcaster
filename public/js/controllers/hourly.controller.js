@@ -1,6 +1,6 @@
 (function(){
   angular.module('weatherApp')
-  .controller('hourlyController', hourlyController);
+    .controller('hourlyController', hourlyController);
 
   hourlyController.$inject = ['$scope', 'weatherService'];
 

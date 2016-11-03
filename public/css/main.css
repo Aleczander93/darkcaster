@@ -26,4 +26,9 @@ input {
   display: flex;
   justify-content: center;
   margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.temp {
+  font-size: 250%;
 }
