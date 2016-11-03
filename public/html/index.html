@@ -57,9 +57,9 @@
         <div class="row">
           <div class="col-md-2" ng-repeat='minute in weather.minutely.data'>
             <div class="well">
-              Time: {{minute.time * 1000 | date:"h:mm a"}}
+              Time: {{weather.minute.time * 1000 | date:"h:mm a"}}
               <div>
-              Prob: {{minute.precipProbability * 100 | number:0}}
+              Prob:{{ minute.precipProbability * 100 | number:0}}
               </div>
               <div>
               Intensity: {{ minute.precipIntensity * 100 | number:0}}
@@ -70,6 +70,31 @@
       </div>
     </div>
 
+
+    <div ng-controller="hourlyController">
+      <div ng-show ="weather.hourly">
+        <h2>It's the hourly weather bruh.</h2>
+        <div class="row">
+                    <h3>{{weather.hourly.summary}}</h3>
+        </div>
+        <div class="row">
+          <div class="col-md-2" ng-repeat='hour in weather.hourly.data'>
+            <div class="well">
+              <div>
+                <img ng-src="images/{{weather.hourly.icon}}.png" alt="{{weather.hourly.icon}}"
+                class = 'img-responsive'>
+              </div>
+              <div>
+              Time: {{weather.hourly.time * 1000 | date:"h:mm a"}}
+              </div>
+              <div>
+              Temperature: {{weather.hourly.temperature | number:0 }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   <!-- Beginning of hourly controller-->
 
